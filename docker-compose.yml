@@ -4,7 +4,6 @@ services:
 
   front:
     image: node
-    user: "react_user"
     working_dir: /usr/app
     volumes:
     - ./front/:/usr/app

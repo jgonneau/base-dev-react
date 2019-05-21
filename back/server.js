@@ -8,7 +8,7 @@ const	express			= require('express'),
 		bodyParser		= require('body-parser'),
 		server			= require('http').createServer(app),
 		s3cr3t			= "0987654321",
-        lport = process.env.PORT || 3000;
+        lport = process.env.PORT || 9999;
 
 //Creation de routes
 app.get('/', function(req, res) {
