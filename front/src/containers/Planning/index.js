@@ -13,6 +13,8 @@ import { Club, Client, Booking, Cours, CoursTemplate, Product } from '../../util
 
 //import PlanningList from 'components/PlanningList'
 
+import Loader from '../../components/Loader'
+
 import { toast } from 'react-toastify'
 
 import './style.scss'
@@ -105,10 +107,29 @@ export default class Planning extends Component {
 
   getCourses() {
 
-    this.setState({ 
-      isCalling: false,
-      courses : []
-      })
+    const that = this
+
+    let query = new Parse.Query(Cours);
+
+    var dateDebut = this.state.date.startOf('d').toDate();
+    var dateFin = this.state.date.endOf('d').toDate();
+
+    query.equalTo('club', this.state.club);
+    query.greaterThanOrEqualTo( 'date', dateDebut );
+    query.lessThanOrEqualTo( 'date', dateFin );
+
+    var allCourses = query.find().then( (lescourses) => {
+
+      console.log("courses |" + lescourses[0].get('date'));    
+
+      this.setState({ 
+        isCalling: false,
+        courses : lescourses
+        })
+
+    });
+
+    
   }
 
   handleLabelClick(elem) {
@@ -319,7 +340,7 @@ export default class Planning extends Component {
           ) : null}
 
           {isCalling.list ? (
-            <div> Loader/ </div>
+            <Loader />
           ) : (
               <div>
                 <h3>Liste des cours</h3>
