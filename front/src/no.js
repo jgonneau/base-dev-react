@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import { Router } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 import Parse from 'parse'
-import { App } from './containers/index.js'
+import { App } from 'containers'
 
-import './styles/global.scss'; //'styles/global.scss'
+import 'styles/global.scss'
 
 Parse.initialize(
   'vj84kC1bckQ8VVeCPDUf1',
