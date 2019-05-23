@@ -11,7 +11,7 @@ import Ionicon from 'react-ionicons'
 import { getItem } from '../../utils/localStorage'
 import { Club, Client, Booking, Cours, CoursTemplate, Product } from '../../utils/parse'; //'../utils/parse'
 
-//import PlanningList from 'components/PlanningList'
+import PlanningList from '../../components/PlanningList'
 
 import Loader from '../../components/Loader'
 
@@ -120,12 +120,19 @@ export default class Planning extends Component {
 
     var allCourses = query.find().then( (lescourses) => {
 
-      console.log("courses |" + lescourses[0].get('date'));    
-
-      this.setState({ 
+      /* //not recommended way
+        this.setState({ 
         isCalling: false,
         courses : lescourses
-        })
+        })*/
+
+        this.setState((prevState, props) => {
+          return {
+            isCalling: false,
+            courses : lescourses
+          };
+        }
+        )
 
     });
 
@@ -344,6 +351,9 @@ export default class Planning extends Component {
           ) : (
               <div>
                 <h3>Liste des cours</h3>
+
+                <PlanningList course={ this.state.courses } />
+
               </div>
             )}
         </div>
